@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Remind Me</title>
+	</head>
+	<body>
+		<div>
+			<h2 class="title">Head</h2>
+			<p class="message">Hello</p>
+		</div>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script>
+			$(document).ready(
+				function(){
+					var upDateMessage = function(){
+						$.ajax({
+							url: "/msgs",
+							success: function(data){
+								console.log(data)
+								var data = $.parseJSON(data);
+								console.log(data)
+								$('div h2').html(data.title);
+								$('div p').html(data.msg);
+							}
+						});
+					};
+					var t = setInterval(upDateMessage, 5000);
+			});
+		</script>
+	</body>
+</html>
